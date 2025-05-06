@@ -1,0 +1,351 @@
+function varargout = Qpsk(varargin)
+% QPSK M-file for Qpsk.fig
+%      QPSK, by itself, creates a new QPSK or raises the existing
+%      singleton*.
+%
+%      H = QPSK returns the handle to a new QPSK or the handle to
+%      the existing singleton*.
+%
+%      QPSK('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in QPSK.M with the given input arguments.
+%
+%      QPSK('Property','Value',...) creates a new QPSK or raises the
+%      existing singleton*.  Starting from the left, property value pairs are
+%      applied to the GUI before Qpsk_OpeningFcn gets called.  An
+%      unrecognized property name or invalid value makes property application
+%      stop.  All inputs are passed to Qpsk_OpeningFcn via varargin.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help Qpsk
+
+% Last Modified by GUIDE v2.5 24-Sep-2012 20:18:17
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @Qpsk_OpeningFcn, ...
+                   'gui_OutputFcn',  @Qpsk_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+
+
+% --- Executes just before Qpsk is made visible.
+function Qpsk_OpeningFcn(hObject, eventdata, handles, varargin)
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   command line arguments to Qpsk (see VARARGIN)
+
+% Choose default command line output for Qpsk
+handles.output = hObject;
+
+% Update handles structure
+guidata(hObject, handles);
+
+% UIWAIT makes Qpsk wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+
+
+% --- Outputs from this function are returned to the command line.
+function varargout = Qpsk_OutputFcn(hObject, eventdata, handles) 
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
+
+% --- Executes on button press in b1.
+function  b1_Callback(hObject, eventdata, handles)
+% hObject    handle to b1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+global a1;
+try 
+   
+    f = str2double(get(handles.NumC,'String'));
+    a1=randi(2,1,f);
+catch exception
+ f= 50;
+ a1=randi(2,1,f);
+end
+
+l=cell(1,f);
+
+    for j=1:f
+       if (a1(1,j))==2;
+           a1(1,j)=0;
+           
+       end
+       mm=num2str(a1(1,j));
+        l(1,j)=cellstr(mm);
+      
+    end
+   a2=num2str(a1);
+set(handles.v1,'Data',l);
+axes(handles.axes1);
+axis on;
+NRZL(a1);
+axes(handles.axes2);
+axis on;
+QPSK(a1,0,handles);
+
+function NRZL(h) 
+%clf; 
+hold off;
+n=1; 
+l=length(h); 
+h(l+1)=1;
+while n<=length(h)-1; 
+t=n-1:0.001:n; 
+%Graficación de los CEROS (0) 
+if h(n) == 0
+if h(n+1)==0 
+    
+y=(t>n); 
+else 
+y=(t==n); 
+end 
+
+d=plot(t,y);grid on 
+title(' NRZ-L'); 
+set(d,'LineWidth',2); 
+hold on; 
+axis([0 length(h)-1 -0.1 1]); 
+disp('zero'); 
+%Graficación de los UNOS (1) 
+else 
+if h(n+1)==0 
+y=(t<n)-0*(t==n);
+else 
+y=(t<n)+1*(t==n);
+end 
+d=plot(t,y);grid on; 
+title('Line code UNIPOLAR RZ'); 
+set(d,'LineWidth',2.5); 
+hold on; 
+axis([0 length(h)-1 -0.1 1]); 
+disp('one'); 
+end 
+n=n+1; 
+%pause; 
+end
+function QPSK(h,r,handles)
+
+l=length(h);
+i=1;
+A=1;
+fom=10;
+fop=10;
+wom= 2*pi*fom;
+wop= 2*pi*fop;
+Tm= 1/fom;
+Tp= 1/fop;
+rho=0.5;
+hold off;
+tm=0:0.001:1*Tm;
+tp=0:4*pi/99:5;
+r1=A*square(wom*tm+rho);
+r2=A*sin(wop*tp);
+dig=[];
+while(i<l)
+   if(h(1,i)==0)&&(h(1,i+1)==0)
+       senal=A*sin((r2)-deg2rad(-135));
+        dig=[dig senal];
+   end;
+   if(h(1,i)==0)&&(h(1,i+1)==1)
+       senal=A*sin((r2)-deg2rad(-45));
+        dig=[dig senal];
+   end;
+   if(h(1,i)==1)&&(h(1,i+1)==0)
+       senal=A*sin((r2)+deg2rad(135));
+        dig=[dig senal];
+   end;
+   if(h(1,i)==1)&&(h(1,i+1)==1)
+       senal=A*sin((r2)+deg2rad(45));
+        dig=[dig senal];
+   end;
+   i=i+2;
+end
+
+tp=0:4*pi/999:(4*pi);
+%a = str2double(get(handles.am,'String'));
+%b = str2double(get(handles.fm,'String'));
+%r=3*sin(2*pi*3*tp)
+x=dig+r;
+plot(x);
+axes(handles.axes6);
+axis on;
+zoom on;
+Fs = 1000; 
+L=l; % Longitud de la señal
+NFFT = 2^nextpow2(L); % Siguiente potencia de 2 de la long de y
+Y = fft(dig,NFFT)/L; % FFT de la señal
+f = Fs/2*linspace(0,1,NFFT/2+1); % Rango de frecuencia
+% Plot single-sided amplitude spectrum.
+% subplot(313)
+
+plot(f,2*abs(Y(1:NFFT/2+1))) 
+axes(handles.axes6);
+axis on;
+
+
+
+
+%zplane(dig);
+
+
+
+
+function v1_Callback(hObject, eventdata, handles)
+% hObject    handle to v1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of v1 as text
+%        str2double(get(hObject,'String')) returns contents of v1 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function v1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to v1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function NumC_Callback(hObject, eventdata, handles)
+% hObject    handle to NumC (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of NumC as text
+%        str2double(get(hObject,'String')) returns contents of NumC as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function NumC_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to NumC (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function am_Callback(hObject, eventdata, handles)
+% hObject    handle to am (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of am as text
+%        str2double(get(hObject,'String')) returns contents of am as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function am_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to am (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function fm_Callback(hObject, eventdata, handles)
+% hObject    handle to fm (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of fm as text
+%        str2double(get(hObject,'String')) returns contents of fm as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function fm_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to fm (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton2.
+function pushbutton2_Callback(hObject, eventdata, handles)
+global B
+global g
+
+
+SNR = str2double(get(handles.NumC,'String'));  
+d=zeros(1,length(g)/3);
+
+    for n=1:length(g)/3
+        q=g(3*n-2);
+        p=g(3*n);
+        imp=g(3*n-1);
+        if (imp==0)&&(p==0)&&(q==0)
+            d(n)= -0.765 + (-0.765*j);
+        end
+        
+          
+        if (imp==0)&&(p==1)&&(q==0)
+            d(n)= 0.765 + (-0.765*j);
+        end     
+        if (imp==1)&&(p==1)&&(q==0)
+            d(n)= 0.765 + (0.765*j);
+        end
+        if (imp==1)&&(p==0)&&(q==0)
+            d(n)= -0.765 + (0.765*j);
+        end
+    end
+    
+    r=awgn(d,SNR);
+    axes(handles.axes3);
+    title('Constelacion QPSK');
+    plot(r,'b.');
+    axis([-1.5 1.5 -.5 2.5]);
+        grid on;
+        
+
+
+
+
+% hObject    handle to pushbutton2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)

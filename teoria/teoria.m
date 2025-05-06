@@ -1,0 +1,350 @@
+function varargout = teoria(varargin)
+% TEORIA M-file for teoria.fig
+%      TEORIA, by itself, creates a new TEORIA or raises the existing
+%      singleton*.
+%
+%      H = TEORIA returns the handle to a new TEORIA or the handle to
+%      the existing singleton*.
+%
+%      TEORIA('CALLBACK',hObject,eventData,handles,...) calls the local
+%      function named CALLBACK in TEORIA.M with the given input arguments.
+%
+%      TEORIA('Property','Value',...) creates a new TEORIA or raises the
+%      existing singleton*.  Starting from the left, property value pairs are
+%      applied to the GUI before teoria_OpeningFcn gets called.  An
+%      unrecognized property name or invalid value makes property application
+%      stop.  All inputs are passed to teoria_OpeningFcn via varargin.
+%
+%      *See GUI Options on GUIDE's Tools menu.  Choose "GUI allows only one
+%      instance to run (singleton)".
+%
+% See also: GUIDE, GUIDATA, GUIHANDLES
+
+% Edit the above text to modify the response to help teoria
+
+% Last Modified by GUIDE v2.5 30-Nov-2013 08:02:51
+
+% Begin initialization code - DO NOT EDIT
+gui_Singleton = 1;
+gui_State = struct('gui_Name',       mfilename, ...
+                   'gui_Singleton',  gui_Singleton, ...
+                   'gui_OpeningFcn', @teoria_OpeningFcn, ...
+                   'gui_OutputFcn',  @teoria_OutputFcn, ...
+                   'gui_LayoutFcn',  [] , ...
+                   'gui_Callback',   []);
+if nargin && ischar(varargin{1})
+    gui_State.gui_Callback = str2func(varargin{1});
+end
+
+if nargout
+    [varargout{1:nargout}] = gui_mainfcn(gui_State, varargin{:});
+else
+    gui_mainfcn(gui_State, varargin{:});
+end
+% End initialization code - DO NOT EDIT
+
+
+% --- Executes just before teoria is made visible.
+function teoria_OpeningFcn(hObject, eventdata, handles, varargin)
+a = imread('teoria.jpg'); %Leer imagen
+image(a)
+axis off;
+% This function has no output args, see OutputFcn.
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+% varargin   command line arguments to teoria (see VARARGIN)
+
+% Choose default command line output for teoria
+handles.output = hObject;
+
+% Update handles structure
+guidata(hObject, handles);
+
+% UIWAIT makes teoria wait for user response (see UIRESUME)
+% uiwait(handles.figure1);
+
+
+% --- Outputs from this function are returned to the command line.
+function varargout = teoria_OutputFcn(hObject, eventdata, handles) 
+% varargout  cell array for returning output args (see VARARGOUT);
+% hObject    handle to figure
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Get default command line output from handles structure
+varargout{1} = handles.output;
+
+
+
+function K1_Callback(hObject, eventdata, handles)
+% hObject    handle to K1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of K1 as text
+%        str2double(get(hObject,'String')) returns contents of K1 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function K1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to K1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function m1_Callback(hObject, eventdata, handles)
+% hObject    handle to m1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of m1 as text
+%        str2double(get(hObject,'String')) returns contents of m1 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function m1_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to m1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function K2_Callback(hObject, eventdata, handles)
+% hObject    handle to K2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of K2 as text
+%        str2double(get(hObject,'String')) returns contents of K2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function K2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to K2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function m2_Callback(hObject, eventdata, handles)
+% hObject    handle to m2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of m2 as text
+%        str2double(get(hObject,'String')) returns contents of m2 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function m2_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to m2 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton1.
+function pushbutton1_Callback(hObject, eventdata, handles)
+sym s;
+t0=0;
+tN=10;
+x0=1;%%valor a cambiar
+y0=1.5;%%valor a modificar
+u0=0;
+v0=0;
+valor=str2double(get(handles.K1,'String'));
+valor1=str2double(get(handles.m1,'String'));
+valor2=str2double(get(handles.K2,'String'));
+valor3=str2double(get(handles.m2,'String'));
+% Parametros Newmark
+beta=1/4;
+gamma=1/2;
+N=1000; % Pasos
+h=(tN-t0)/N; % Intervalo
+% Primeros valores del vector solucion
+x(1)=x0;
+y(1)=y0;
+u(1)=u0;
+v(1)=v0;
+ 
+% Vector solucion S
+S=[x(1);y(1);u(1);v(1)];
+ 
+% Metodo de Newmark
+ 
+for n=1:N
+    % Matrices de coeficientes
+    A=[1+beta*((valor+valor2)/valor1)*h^2 , -beta*(valor2/valor1)*h^2 , 0 , 0 ; 
+        -beta*(valor2/valor3)*h^2 , 1+beta*((valor2)/valor3)*h^2 , 0 , 0 ; 
+        h*gamma*((valor2+valor)/valor1) , -h*gamma*(valor2/valor1) , 1 , 0 ; 
+        -h*gamma*(valor2/valor3) , h*gamma*((valor2)/valor3) , 0 , 1];
+ 
+    B=[1-(1/2-beta)*((valor2+valor)/valor1)*h^2, (1/2-beta)*(valor2/valor1)*h^2 , h , 0 ; 
+        (1/2-beta)*(valor2/valor3)*h^2 , 1-(1/2-beta)*((valor2)/valor3)*h^2 , 0 , h ; 
+        -h*(1-gamma)*((valor2+valor)/valor1) , h*(1-gamma)*(valor2/valor1) , 1 , 0 ; 
+        h*(1-gamma)*(valor2/valor3) , -h*(1-gamma)*((valor2)/valor3) , 0 , 1];
+ 
+    % Sistema
+    S=A\(B*S);
+    x(n+1)=S(1);
+    y(n+1)=S(2);
+    u(n+1)=S(3);
+    v(n+1)=S(4);
+
+end
+ 
+ 
+% Representacion
+t=t0:h:tN;
+%%figure(1)
+%%axis([0,9,0,10])
+hold on
+ %axes(handles.axes4);
+ 
+%A=eval(A); 
+%B=eval(B);
+%c1=zero(A);
+%p1=pole(B);
+%zplane(c1,p1);
+
+%%title('Newmark')
+axes(handles.axes1);
+plot(x+2,t,'-')
+plot(y+4,t,'-r')
+plot(2,t,'-g')
+plot(4,t,'-g')
+set(handles.t1,'String',x);
+set(handles.t2,'String',y);
+
+%%hold off;
+
+
+% hObject    handle to pushbutton1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+
+function edit5_Callback(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit5 as text
+%        str2double(get(hObject,'String')) returns contents of edit5 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit5_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit5 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+
+function edit6_Callback(hObject, eventdata, handles)
+% hObject    handle to edit6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit6 as text
+%        str2double(get(hObject,'String')) returns contents of edit6 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit6_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit6 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
+
+
+% --- Executes on button press in pushbutton3.
+function pushbutton3_Callback(hObject, eventdata, handles)
+
+
+% hObject    handle to pushbutton3 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes on button press in pushbutton4.
+function pushbutton4_Callback(hObject, eventdata, handles)
+sym s;
+t0=0;
+tN=10;
+x0=1;%%valor a cambiar
+y0=1.5;%%valor a modificar
+u0=0;
+v0=0;
+valor=str2double(get(handles.K1,'String'));
+valor1=str2double(get(handles.m1,'String'));
+valor2=str2double(get(handles.K2,'String'));
+valor3=str2double(get(handles.m2,'String'));
+% Parametros Newmark
+beta=1/4;
+gamma=1/2;
+N=1000; % Pasos
+h=(tN-t0)/N; % Intervalo
+% Primeros valores del vector solucion
+x(1)=x0;
+y(1)=y0;
+u(1)=u0;
+v(1)=v0;
+ 
+% Vector solucion S
+S=[x(1);y(1);u(1);v(1)];
+ 
+
+ A=[[1+beta*((valor+valor2)/valor1)*h^2 , -beta*(valor2/valor1)*h^2 , 0 , 0 ; 
+        -beta*(valor2/valor3)*h^2 , 1+beta*((valor2)/valor3)*h^2 , 0 , 0 ; 
+        h*gamma*((valor2+valor)/valor1) , -h*gamma*(valor2/valor1) , 1 , 0 ; 
+        -h*gamma*(valor2/valor3) , h*gamma*((valor2)/valor3) , 0 , 1]];
+ 
+    B=[[1-(1/2-beta)*((valor2+valor)/valor1)*h^2, (1/2-beta)*(valor2/valor1)*h^2 , h , 0 ; 
+        (1/2-beta)*(valor2/valor3)*h^2 , 1-(1/2-beta)*((valor2)/valor3)*h^2 , 0 , h ; 
+        -h*(1-gamma)*((valor2+valor)/valor1) , h*(1-gamma)*(valor2/valor1) , 1 , 0 ; 
+        h*(1-gamma)*(valor2/valor3) , -h*(1-gamma)*((valor2)/valor3) , 0 , 1]];
+    
+    G=tf(B,A);
+    axes(handles.axes4);
+    rlocus(G);
+% hObject    handle to pushbutton4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
