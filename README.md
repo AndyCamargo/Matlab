@@ -5,7 +5,7 @@ Incluye simulaciones con interfaces gráficas (.fig) y scripts (.m) para visuali
 
 📂 Estructura Principal
 
-,,,
+```
 Matlab/
 │
 ├── BODE.m / BODE.fig                     # Análisis de diagramas de Bode
@@ -43,7 +43,7 @@ Matlab/
 └── basededatos/
     ├── biometrico.m / biometrico.fig       # Proyecto de base de datos biométrica
 
-,,,
+```
 
 
 Análisis de Sistemas
